@@ -1,4 +1,6 @@
 const form = document.getElementById('saisie-message');
+let utilisateurs = ['Bobbi', 'Bibbo'];
+let messages = [];
 
 function ecouteSubmitMessage() {
     form.addEventListener('submit', (ev) => {
@@ -20,9 +22,23 @@ function ecouteSubmitMessage() {
 }
 
 function start() {
+    // Ecoute d'événements/interactions
     document.querySelector('#conversation-courante .messages').scrollTop = document.querySelector('#conversation-courante .messages').scrollHeight;
     ecouteSubmitMessage();
+
+    // Affichage
+    afficheListeUtilisateurs(utilisateurs);
+    setInterval(() => {afficheListeUtilisateurs(utilisateurs)}, 5000);
 }
 
+function afficheListeUtilisateurs(listeUtilisateurs) {
+    document.getElementById('users').innerHTML = '';
+    for(let utilisateur of listeUtilisateurs) {
+        let noeudUstilisateur = document.createElement('li');
+        noeudUstilisateur.classList.add('user');
+        noeudUstilisateur.innerText = utilisateur;
+        document.getElementById('users').appendChild(noeudUstilisateur);
+    }
+}
 
 start();
