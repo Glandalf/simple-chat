@@ -17,8 +17,25 @@
 * écrire des messages à une personne
 * ...
 
+## Structure des données
 
+### Utilisateurs
 
+A l'heure actuelle, nos utilisateurs sont une simple chaine de caractère. Cela évoluera certainement.
+
+### Messages
+Un message est composé de : 
+- le message écrit
+- un auteur
+- une date (optionnel)
+
+```json
+{
+    "contenu": "Bonjour monde",
+    "auteur": "Bobbu",
+    "date": Date.now()
+}
+```
 ## Aides Git
 
 TODO: compléter cette partie
