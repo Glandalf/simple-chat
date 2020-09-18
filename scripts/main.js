@@ -1,6 +1,6 @@
 const form = document.getElementById('saisie-message');
 let utilisateur = {
-    "pseudo": "Jean Jean"
+    "pseudo": "Dallas@ole.me"
 };
 let utilisateurs = ['Bobbi', 'Bibbo'];
 let messages = [];
@@ -26,6 +26,8 @@ function ecouteSubmitMessage() {
 }
 
 function start() {
+    document.getElementById('champ-message-en-cours').focus();
+    
     // Ecoute d'événements/interactions
     document.querySelector('#conversation-courante .messages').scrollTop = document.querySelector('#conversation-courante .messages').scrollHeight;
     ecouteSubmitMessage();
@@ -36,7 +38,10 @@ function start() {
 
     afficheListeMessages(messages);
     setInterval(() => { afficheListeMessages(messages) }, 1000);
-    document.getElementById('champ-message-en-cours').focus();
+
+    // Synchronisation avec notre API
+    getMessages();
+    setInterval(getMessages, 5000);
 }
 
 function afficheListeUtilisateurs(listeUtilisateurs) {
@@ -57,9 +62,28 @@ function afficheListeMessages(listeMessages) {
         message.auteur === utilisateur.pseudo? noeudMessage.classList.add('mon'): null;
         noeudMessage.innerHTML = message.contenu + '<br>';
         const dateMessage = new Date(message.date)
-        noeudMessage.innerHTML += dateMessage.toLocaleDateString();
+        noeudMessage.innerHTML += dateMessage.toLocaleDateString() + ' | ' + message.auteur;
         document.querySelector('#conversation-courante > .messages').appendChild(noeudMessage);
     }
+}
+
+function getMessages() {
+    // On doit ici spécifier une URL qui retournera les informations demandées
+    fetch('https://jsonplaceholder.typicode.com/comments')
+        .then(response => response.json())
+        .then(comments => {
+            // On peut manipuler notre objet "comments" 
+            // (voire le renommer pour qu'il colle aux informations que l'on a récupéré) 
+            messages.splice(0, messages.length);    // Retire du tableau tous les éléments compris entre 0 et sa taille (donc tous)
+            for (let i=20; i<25; i++) {
+                commentaireCourrant = {
+                    "contenu": comments[i].body,
+                    "auteur": comments[i].email,
+                    "date": null
+                }
+                messages.push(commentaireCourrant);
+            }
+        })
 }
 
 start();
