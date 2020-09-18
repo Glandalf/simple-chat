@@ -9,7 +9,7 @@ function ecouteSubmitMessage() {
     form.addEventListener('submit', (ev) => {
         // Evite que la page se recharge
         ev.preventDefault();
-        const noeudChampMessage = ev.target.getElementsByClassName('champ-message')[0]; 
+        const noeudChampMessage = document.getElementById('champ-message-en-cours'); 
         const messageAEnvoyer = noeudChampMessage.value;
         const noeudMessages = document.querySelector('#conversation-courante .messages');
 
@@ -36,6 +36,7 @@ function start() {
 
     afficheListeMessages(messages);
     setInterval(() => { afficheListeMessages(messages) }, 1000);
+    document.getElementById('champ-message-en-cours').focus();
 }
 
 function afficheListeUtilisateurs(listeUtilisateurs) {
