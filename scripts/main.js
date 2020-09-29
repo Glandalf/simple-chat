@@ -1,6 +1,6 @@
 const form = document.getElementById('saisie-message');
 let utilisateur = {
-    "pseudo": "Jean Jean"
+    "pseudo": "Dallas@ole.me"
 };
 let utilisateurs = ['Bobbi', 'Bibbo'];
 let messages = [];
@@ -13,11 +13,11 @@ function ecouteSubmitMessage() {
         const messageAEnvoyer = noeudChampMessage.value;
         const noeudMessages = document.querySelector('#conversation-courante .messages');
 
-       messages.push({
-           contenu: messageAEnvoyer,
-           auteur: utilisateur.pseudo,
-           date: Date.now()
-       })
+        messages.push({
+            contenu: messageAEnvoyer,
+            auteur: utilisateur.pseudo,
+            date: Date.now()
+        })
         // On vide le champ de saisie pour le prochain message
         noeudChampMessage.value = '';
         // Scrolle tout en bas de la fenêtre de conversation
@@ -26,6 +26,8 @@ function ecouteSubmitMessage() {
 }
 
 function start() {
+    document.getElementById('champ-message-en-cours').focus();
+    
     // Ecoute d'événements/interactions
     document.querySelector('#conversation-courante .messages').scrollTop = document.querySelector('#conversation-courante .messages').scrollHeight;
     ecouteSubmitMessage();
@@ -33,10 +35,6 @@ function start() {
     // Affichage
     afficheListeUtilisateurs(utilisateurs);
     setInterval(() => { afficheListeUtilisateurs(utilisateurs) }, 5000);
-
-    afficheListeMessages(messages);
-    setInterval(() => { afficheListeMessages(messages) }, 1000);
-    document.getElementById('champ-message-en-cours').focus();
 }
 
 function afficheListeUtilisateurs(listeUtilisateurs) {
@@ -45,6 +43,7 @@ function afficheListeUtilisateurs(listeUtilisateurs) {
         let noeudUstilisateur = document.createElement('li');
         noeudUstilisateur.classList.add('user');
         noeudUstilisateur.innerText = utilisateur;
+        noeudUstilisateur.addEventListener('click', () => { ouvrirConversation(utilisateur); });
         document.getElementById('users').appendChild(noeudUstilisateur);
     }
 }
@@ -57,9 +56,40 @@ function afficheListeMessages(listeMessages) {
         message.auteur === utilisateur.pseudo? noeudMessage.classList.add('mon'): null;
         noeudMessage.innerHTML = message.contenu + '<br>';
         const dateMessage = new Date(message.date)
-        noeudMessage.innerHTML += dateMessage.toLocaleDateString();
+        noeudMessage.innerHTML += dateMessage.toLocaleDateString() + ' | ' + message.auteur;
         document.querySelector('#conversation-courante > .messages').appendChild(noeudMessage);
     }
+}
+
+function getMessages() {
+    // On doit ici spécifier une URL qui retournera les informations demandées
+    fetch('https://jsonplaceholder.typicode.com/comments')
+        .then(response => response.json())
+        .then(comments => {
+            // On peut manipuler notre objet "comments" 
+            // (voire le renommer pour qu'il colle aux informations que l'on a récupéré) 
+            messages.splice(0, messages.length);    // Retire du tableau tous les éléments compris entre 0 et sa taille (donc tous)
+            for (let i=20; i<25; i++) {
+                commentaireCourrant = {
+                    "contenu": comments[i].body,
+                    "auteur": comments[i].email,
+                    "date": null
+                }
+                messages.push(commentaireCourrant);
+            }
+        })
+}
+
+function ouvrirConversation(nomDeLaConversation) {
+    // Afficher le nom de la conversation dans la barre de titre de la conversation
+    document.querySelector('#conversation-courante .titre').innerHTML = nomDeLaConversation;
+
+    // Récupérer/afficher les messages de ladite conversation
+    // TODO: récupérer la vraie liste des messages et pas un appel générique
+    getMessages();
+    afficheListeMessages(messages);
+    setInterval(() => afficheListeMessages(messages), 3000);
+
 }
 
 start();
