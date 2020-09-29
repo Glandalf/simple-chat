@@ -13,11 +13,11 @@ function ecouteSubmitMessage() {
         const messageAEnvoyer = noeudChampMessage.value;
         const noeudMessages = document.querySelector('#conversation-courante .messages');
 
-       messages.push({
-           contenu: messageAEnvoyer,
-           auteur: utilisateur.pseudo,
-           date: Date.now()
-       })
+        messages.push({
+            contenu: messageAEnvoyer,
+            auteur: utilisateur.pseudo,
+            date: Date.now()
+        })
         // On vide le champ de saisie pour le prochain message
         noeudChampMessage.value = '';
         // Scrolle tout en bas de la fenêtre de conversation
@@ -35,15 +35,6 @@ function start() {
     // Affichage
     afficheListeUtilisateurs(utilisateurs);
     setInterval(() => { afficheListeUtilisateurs(utilisateurs) }, 5000);
-
-    /*
-    afficheListeMessages(messages);
-    setInterval(() => { afficheListeMessages(messages) }, 1000);
-    */
-    
-    // Synchronisation avec notre API
-    getMessages();
-    setInterval(getMessages, 5000);
 }
 
 function afficheListeUtilisateurs(listeUtilisateurs) {
@@ -95,7 +86,9 @@ function ouvrirConversation(nomDeLaConversation) {
 
     // Récupérer/afficher les messages de ladite conversation
     // TODO: récupérer la vraie liste des messages et pas un appel générique
+    getMessages();
     afficheListeMessages(messages);
+    setInterval(() => afficheListeMessages(messages), 3000);
 
 }
 
