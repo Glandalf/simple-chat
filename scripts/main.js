@@ -36,9 +36,11 @@ function start() {
     afficheListeUtilisateurs(utilisateurs);
     setInterval(() => { afficheListeUtilisateurs(utilisateurs) }, 5000);
 
+    /*
     afficheListeMessages(messages);
     setInterval(() => { afficheListeMessages(messages) }, 1000);
-
+    */
+    
     // Synchronisation avec notre API
     getMessages();
     setInterval(getMessages, 5000);
@@ -50,6 +52,7 @@ function afficheListeUtilisateurs(listeUtilisateurs) {
         let noeudUstilisateur = document.createElement('li');
         noeudUstilisateur.classList.add('user');
         noeudUstilisateur.innerText = utilisateur;
+        noeudUstilisateur.addEventListener('click', () => { ouvrirConversation(utilisateur); });
         document.getElementById('users').appendChild(noeudUstilisateur);
     }
 }
@@ -84,6 +87,16 @@ function getMessages() {
                 messages.push(commentaireCourrant);
             }
         })
+}
+
+function ouvrirConversation(nomDeLaConversation) {
+    // Afficher le nom de la conversation dans la barre de titre de la conversation
+    document.querySelector('#conversation-courante .titre').innerHTML = nomDeLaConversation;
+
+    // Récupérer/afficher les messages de ladite conversation
+    // TODO: récupérer la vraie liste des messages et pas un appel générique
+    afficheListeMessages(messages);
+
 }
 
 start();
