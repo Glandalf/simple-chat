@@ -61,15 +61,15 @@ function afficheListeMessages(listeMessages) {
     }
 }
 
-function getMessages() {
+function getMessages(nomConversation) {
+    messages.splice(0, messages.length);
     // On doit ici spécifier une URL qui retournera les informations demandées
-    fetch('https://jsonplaceholder.typicode.com/comments')
+    fetch('http://localhost:9001/messages.php?conversation=' + nomConversation)
         .then(response => response.json())
         .then(comments => {
             // On peut manipuler notre objet "comments" 
             // (voire le renommer pour qu'il colle aux informations que l'on a récupéré) 
-            messages.splice(0, messages.length);    // Retire du tableau tous les éléments compris entre 0 et sa taille (donc tous)
-            for (let i=20; i<25; i++) {
+            for (let i=0; i < comments.length; i++) {
                 commentaireCourrant = {
                     "contenu": comments[i].body,
                     "auteur": comments[i].email,
@@ -86,7 +86,7 @@ function ouvrirConversation(nomDeLaConversation) {
 
     // Récupérer/afficher les messages de ladite conversation
     // TODO: récupérer la vraie liste des messages et pas un appel générique
-    getMessages();
+    getMessages(nomDeLaConversation.toLowerCase());
     afficheListeMessages(messages);
     setInterval(() => afficheListeMessages(messages), 3000);
 
