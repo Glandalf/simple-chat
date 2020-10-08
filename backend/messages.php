@@ -1,17 +1,24 @@
 <?php
 // Faire comprendre au navigateur ce qu'on lui répond :
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
 
 
-// Lorsque l'on veut accéder à une conversation (récupérer le contenu)
-if (file_exists("./sample-messages-" . $_GET['conversation'] . ".json")) {
-    echo file_get_contents("./sample-messages-" . $_GET['conversation'] . ".json");
-}
-else {
-    echo "[]";
-}
+    include("db.php");
+    $connexion = new PDO($url, $user, $pass); 
+    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $req = "SELECT 0 as PostId, message_id as id, pseudo as name, email, message as body 
+            FROM messages m JOIN utilisateurs u ON u.id = m.utilisateur_id
+            WHERE conversation = :conv
+            "; 
 
-// Lorsque l'on veut ajouter un message à une conversation (créer/modifier le contenu)
-// TODO
+    try {
+        $statment = $connexion->prepare($req);
+        $param = $_GET["conversation"];
+        $statment->execute(["conv" => $param]);
+        $resultats = $statment->fetchAll(PDO::FETCH_ASSOC);
+    } catch(Exception $exception) {
+        echo $exception->getMessage(); 
+    }
+    echo json_encode($resultats);
