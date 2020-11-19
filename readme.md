@@ -37,6 +37,20 @@ Un message est composé de :
     "date": Date.now()
 }
 ```
+
+## Quick start
+
+* git clone
+* créer un fichier `backend/db.php`
+
+  ```php
+    <?php
+
+    $url = '';
+    $user = '';
+    $pass = '';
+  ```
+
 ## Aides Git
 
 TODO: compléter cette partie

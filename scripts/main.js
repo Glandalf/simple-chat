@@ -1,8 +1,10 @@
-const form = document.getElementById('saisie-message');
+let form = document.getElementById('saisie-message');
 let utilisateur = {
     "pseudo": "Dallas@ole.me"
 };
-let utilisateurs = ['Bobbi', 'Bibbo'];
+
+
+let utilisateurs = ['Bobbi', 'Bibbo']
 let messages = [];
 
 function ecouteSubmitMessage() {
