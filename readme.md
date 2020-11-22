@@ -3,11 +3,12 @@
 ## Fonctionnalités existantes
 
 * Structure de la page de messagerie
+* lorsque je saisis un message, il apparait dans la liste
 
 ## Fonctionnalités en cours
 
-* lorsque je saisis un message, il apparait dans la liste
 * Définir une structure JS pour gérer tous les messages/utilisateurs/conversations, etc.
+* Récupérer la liste des utilisateurs en BDD et les afficher proprement dans la page
 
 ## Fonctionnalités à venir
 
@@ -36,6 +37,20 @@ Un message est composé de :
     "date": Date.now()
 }
 ```
+
+## Quick start
+
+* git clone
+* créer un fichier `backend/db.php`
+
+  ```php
+    <?php
+
+    $url = '';
+    $user = '';
+    $pass = '';
+  ```
+
 ## Aides Git
 
 TODO: compléter cette partie

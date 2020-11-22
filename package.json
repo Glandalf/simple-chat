@@ -1,0 +1,28 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "Un chat simple",
+  "main": "scripts/main.js",
+  "scripts": {
+    "lint": "eslint ./scripts/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glandalf/simple-chat.git"
+  },
+  "keywords": [
+    "chat",
+    "js",
+    "php",
+    "mariab"
+  ],
+  "author": "Nous",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Glandalf/simple-chat/issues"
+  },
+  "homepage": "https://github.com/Glandalf/simple-chat#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0"
+  }
+}
