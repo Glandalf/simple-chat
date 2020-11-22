@@ -5,7 +5,7 @@
     include("db.php");
 
 
-
+    // Lève l'ambiguïté sur le driver à utiliser
     $connexion = new PDO("mysql:host=".$url."; dbname=chat", $user, $pass); 
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
