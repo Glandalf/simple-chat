@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Formulaire inscription</title>
+</head>
+
+<body>
+    <div class="formulaire">
+        <form name="inscription" method="post" action="inscription.js" onsubmit="return inscriptionForm()">
+            <h1> Rejoins ce chat de qualité</h1>
+            <div class="formfield">
+            
+                 
+                <input placeholder="Prénom*" type="text" name="prenom" id="prenom" maxlength="20" required >
+          
+                <input placeholder="Nom*" type="text" name="nom" id="nom" maxlength="20" required>
+            
+                <input placeholder="Pseudo*" type="text" name="pseudo" id="pseudo" required>
+            
+                <input placeholder="Email*" type="text" name="mail" id="mail" maxlength="20" required>
+            
+            </div>
+            <div class="accept">
+                <label class="switch">
+                    <input type="checkbox">
+                     <span class="slider round"></span>
+                </label>
+                <p> Je certifie être majeur</p>
+            </div>
+            <div class="accept">
+                <label class="switch">
+                    <input type="checkbox">
+                     <span class="slider round"></span>
+                </label>
+                <p> En continuant, vous confirmez les CGU</p>
+            </div>
+            
+            <button type="button" onclick="envoyerForm()">S'inscrire</button>
+           
+            <script src="scripts/inscription.js"></script>
+        </form>
+    </div>
+</body>
+
+</html>
