@@ -8,7 +8,7 @@
     $message = $_GET['message'];
 
     // Connexion à la bdd
-    $connexion = new PDO($url, $user, $pass);
+    $connexion = new PDO("mysql:host=".$url."; dbname=chat", $user, $pass);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);     // pour afficher les erreurs dans le catch
 
     // Création d'une requête SQL (plus exactement, d'un requête paramétrée)
