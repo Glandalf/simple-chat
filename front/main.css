@@ -134,3 +134,10 @@ label{
     display: inline-flex;
     justify-content: center;
   }
+
+  
+  /*TODO : Faire un affichage classy (label)*/
+
+  label{
+    display: none;
+  }
