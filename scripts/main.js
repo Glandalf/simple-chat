@@ -1,8 +1,10 @@
-const form = document.getElementById('saisie-message');
+let form = document.getElementById('saisie-message');
 let utilisateur = {
     "pseudo": "Dallas@ole.me"
 };
-let utilisateurs = ['Bobbi', 'Bibbo'];
+
+
+let utilisateurs = ['Bobbi', 'Bibbo']
 let messages = [];
 
 function ecouteSubmitMessage() {
@@ -31,6 +33,9 @@ function start() {
     // Ecoute d'événements/interactions
     document.querySelector('#conversation-courante .messages').scrollTop = document.querySelector('#conversation-courante .messages').scrollHeight;
     ecouteSubmitMessage();
+
+    // Récupération des utilisateurs 
+    getUtilisateurs();
 
     // Affichage
     afficheListeUtilisateurs(utilisateurs);
@@ -61,6 +66,26 @@ function afficheListeMessages(listeMessages) {
     }
 }
 
+function getUtilisateurs() {
+    // On vide le tableau des utilisateurs :
+    utilisateurs.splice(0, utilisateurs.length);
+    // utilisateurs.length = 0;
+
+    // Récupérer sur le serveur la liste des utilisateurs
+    fetch('http://localhost:9001/utilisateurs.php')
+        .then(response => response.json())
+        .then(utilisateursDuServeur => {
+            // Parcourir la liste des utilisateurs et :
+            utilisateursDuServeur.forEach(utilisateur => {
+                // pour chaque utilisateur, on l'ajoute dans la page HTML
+                console.log('UTILISATEUR', utilisateur);
+                // TODO: vérifier que cela fonctionne.
+                // TODO: afficher les utilisateurs dans la page au lieu de la console.
+            })
+
+        });
+}
+
 function getMessages(nomConversation) {
     messages.splice(0, messages.length);
     // On doit ici spécifier une URL qui retournera les informations demandées
@@ -85,7 +110,7 @@ function ouvrirConversation(nomDeLaConversation) {
     document.querySelector('#conversation-courante .titre').innerHTML = nomDeLaConversation;
 
     // Récupérer/afficher les messages de ladite conversation
-    // TODO: récupérer la vraie liste des messages et pas un appel générique
+    // DONE: récupérer la vraie liste des messages et pas un appel générique
     getMessages(nomDeLaConversation.toLowerCase());
     afficheListeMessages(messages);
     setInterval(() => afficheListeMessages(messages), 3000);
