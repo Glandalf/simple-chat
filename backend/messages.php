@@ -9,8 +9,9 @@ error_reporting(E_ALL);
     include("db.php");
 
 
-    // Lève l'ambiguïté sur le driver à utiliser
-    $connexion = new PDO("mysql:host=".$url."; dbname=chat", $user, $pass); 
+    include("db.php");
+    $connexion = new PDO("mysql:host=".$url."; dbname=chat", $user, $pass);
+
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $req = "SELECT 0 as PostId, message_id as id, pseudo as name, email, message as body 

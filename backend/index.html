@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notre petit chat</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Ma messagerie</title>
 </head>
 <body>
-    <h1>Simple chat</h1>
-    <p>Bienvenue ? Maintenant partez...</p>
+    <ul id="users"></ul>
+    <section id="conversation-courante">
+        <h2 class="titre"></h2>
+        <div class="messages">
+            <h2 class="astuce">Sélectionnez une conversation pour afficher des messages</h2>
+        </div>
+        <form id="saisie-message">
+            <input id="champ-message-en-cours" class="champ-message" type="text" placeholder="Tapez votre message">
+            <button class="bouton">Go</button>
+        </form>
+    </section>
+    <script src="scripts/main.js"></script>
+    
 </body>
 </html>

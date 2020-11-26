@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Formulaire inscription</title>
+</head>
+
+<body>
+    <div class="formulaire">
+        <form name="inscription" id="inscriptionForm" method="post" action="main.js" >
+            <h1> Rejoins ce chat de qualité</h1>
+
+            <div class="formfield">
+            
+                <label for="pseudo">Ton pseudo </label>
+                <input placeholder="Pseudo*" type="text" name="pseudo" id="pseudo" required>
+
+                <label for="mail">Ton email</label>
+                <input placeholder="Email*" type="text" name="mail" id="mail" maxlength="20" required>
+                
+                <label for="birthdate">Ta date de naissance </label>           
+                <input placeholder="Date de Naissance*" type="text" name="birthdate" id="birthdate" maxlength="20" required >
+              
+                <label for="mdp">Choisis un mot de passe </label>           
+                <input placeholder="Mot de passe*" type="text" name="mdp" id="mdp" maxlength="20" required >
+              
+                <label for="mdp2">Confirme ton mot de passe </label>           
+                <input placeholder="Confirmez mot de passe*" type="text" name="mdp2" id="mdp2" maxlength="20" required >  
+            
+            </div>
+            
+            <div class="accept">
+                <label class="switch">
+                    <input type="checkbox">
+                     <span class="slider round"></span>
+                </label>
+                <p> Je certifie être majeur</p>
+            </div>
+            <div class="accept">
+                <label class="switch">
+                    <input type="checkbox">
+                     <span class="slider round"></span>
+                </label>
+                <p> En continuant, vous confirmez les CGU</p>
+            </div>
+            
+            <button type="submit" >S'inscrire</button>
+           
+        </form>  
+        <p style="color :red;" id="erreur"></p>        
+        <script src="main.js"></script>
+
+    </div>
+</body>
+
+</html>
